@@ -93,7 +93,7 @@ export default function Portfolio() {
           <a href="mailto:sahu.jyotirmaya26@gmail.com"><Mail size={16} aria-hidden="true" /> sahu.jyotirmaya26@gmail.com</a>
           <a href="tel:+971543334174"><Phone size={16} aria-hidden="true" /> +971 54 333 4174</a>
           <a href="https://linkedin.com/in/jyotirmaya-sahu" target="_blank" rel="noreferrer"><Linkedin size={16} aria-hidden="true" /> linkedin.com/in/jyotirmaya-sahu</a>
-          <span><MapPin size={16} aria-hidden="true" /> Dubai, UAE</span>
+          <span><MapPin size={16} aria-hidden="true" /> Dubai, UAE · UAE residence visa · available on short notice</span>
         </div>
       </div>
       <a className={styles.contactButton} href="mailto:sahu.jyotirmaya26@gmail.com">Start a conversation <ArrowUpRight size={20} /></a>
