@@ -3,11 +3,32 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import type { IconType } from "react-icons";
+import { SiAnthropic, SiDocker, SiFastapi, SiGooglecloud, SiGooglegemini, SiKubernetes, SiLangchain, SiMlflow, SiN8N, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPytorch, SiQdrant, SiReact, SiSupabase, SiTensorflow, SiTypescript } from "react-icons/si";
+import { TbApi, TbBrandAws, TbBrandAzure, TbBrandOpenai, TbBrandTwilio, TbMailAi, TbWebhook } from "react-icons/tb";
+import { FaPython } from "react-icons/fa6";
 import styles from "./Portfolio.module.css";
 
 type Project = { title: string; type: string; metric?: string; description: string; details: string[]; image?: string; href?: string; featured?: boolean };
 type ClientWork = { client: string; project: string; description: string; details: string[]; partner?: string };
-type Expertise = { title: string; promise: string; description: string; builds: string[]; stack: string[] };
+type ToolId = "openai" | "anthropic" | "gemini" | "langchain" | "qdrant" | "highlevel" | "n8n" | "api" | "webhook" | "email" | "twilio" | "react" | "nextjs" | "typescript" | "nodejs" | "fastapi" | "postgresql" | "supabase" | "python" | "pytorch" | "tensorflow" | "aws" | "azure" | "gcp" | "docker" | "kubernetes" | "mlflow";
+type Expertise = { title: string; promise: string; description: string; builds: string[]; stack: ToolId[] };
+type ToolMeta = { name: string; icon?: IconType; custom?: "highlevel" };
+
+const tools: Record<ToolId, ToolMeta> = {
+  openai: { name: "OpenAI", icon: TbBrandOpenai }, anthropic: { name: "Anthropic", icon: SiAnthropic }, gemini: { name: "Google Gemini", icon: SiGooglegemini }, langchain: { name: "LangChain", icon: SiLangchain }, qdrant: { name: "Qdrant", icon: SiQdrant },
+  highlevel: { name: "HighLevel", custom: "highlevel" }, n8n: { name: "n8n", icon: SiN8N }, api: { name: "REST APIs", icon: TbApi }, webhook: { name: "Webhooks", icon: TbWebhook }, email: { name: "Email automation", icon: TbMailAi }, twilio: { name: "Twilio", icon: TbBrandTwilio },
+  react: { name: "React", icon: SiReact }, nextjs: { name: "Next.js", icon: SiNextdotjs }, typescript: { name: "TypeScript", icon: SiTypescript }, nodejs: { name: "Node.js", icon: SiNodedotjs }, fastapi: { name: "FastAPI", icon: SiFastapi }, postgresql: { name: "PostgreSQL", icon: SiPostgresql }, supabase: { name: "Supabase", icon: SiSupabase },
+  python: { name: "Python", icon: FaPython }, pytorch: { name: "PyTorch", icon: SiPytorch }, tensorflow: { name: "TensorFlow", icon: SiTensorflow }, aws: { name: "AWS", icon: TbBrandAws }, azure: { name: "Microsoft Azure", icon: TbBrandAzure }, gcp: { name: "Google Cloud", icon: SiGooglecloud }, docker: { name: "Docker", icon: SiDocker }, kubernetes: { name: "Kubernetes", icon: SiKubernetes }, mlflow: { name: "MLflow", icon: SiMlflow },
+};
+
+function ToolLogo({ tool }: { tool: ToolId }) {
+  const item = tools[tool];
+  const Icon = item.icon;
+  return <span className={styles.toolLogo} role="img" aria-label={item.name} data-label={item.name} title={item.name}>
+    {Icon ? <Icon aria-hidden="true" /> : <span className={styles.highLevelMark} aria-hidden="true" />}
+  </span>;
+}
 
 const projects: Project[] = [
   { title: "Treÿsta Lead Flow", type: "Real-time AI agent · Dubai brokerage", metric: "EN · HI · AR · multi-turn", image: "/work/treysta.png", href: "https://treysta-lead-flow.vercel.app/", description: "An AI agent for a Dubai real estate brokerage that qualifies incoming leads through a human, multi-turn conversation in English, Hindi, and Arabic, then writes the qualified, routed lead straight into the CRM. Grounded on the client's live projects so answers stay accurate.", details: ["OpenAI", "Multi-turn agent", "Webhook HMAC", "Idempotent CRM sync", "TypeScript"], featured: true },
@@ -26,10 +47,10 @@ const clientWork: ClientWork[] = [
 ];
 
 const expertiseGroups: Expertise[] = [
-  { title: "AI products & agents", promise: "Systems that reason, retrieve, speak, and take action.", description: "I turn language models into dependable products with grounded context, controlled tool use, human review, and measurable quality.", builds: ["AI agents and copilots", "RAG and knowledge systems", "Real-time voice AI", "Evaluation and guardrails"], stack: ["OpenAI", "Anthropic", "Gemini", "Llama", "LangGraph", "LlamaIndex", "Pinecone", "Qdrant"] },
-  { title: "Automation & CRM", promise: "Revenue and operations workflows that keep moving without manual follow-up.", description: "I connect the systems a business already uses, remove repetitive work, and design clear exception paths for the moments that still need a person.", builds: ["GoHighLevel CRM systems", "n8n workflow automation", "Lead routing and follow-up", "API and webhook integrations"], stack: ["GoHighLevel", "n8n", "REST APIs", "Webhooks", "Email", "Twilio", "Sales automation"] },
-  { title: "Full-stack applications", promise: "Useful software from first interaction to the underlying data model.", description: "I design and ship customer-facing products and internal platforms with accessible interfaces, typed APIs, secure data, and operational clarity.", builds: ["SaaS products and portals", "Operational dashboards", "Internal business tools", "Responsive web applications"], stack: ["React", "Next.js", "TypeScript", "Node.js", "FastAPI", "PostgreSQL", "Supabase", "Playwright"] },
-  { title: "ML, data & infrastructure", promise: "Production foundations that make intelligent products fast, observable, and scalable.", description: "I build the model and data layer, package it for repeatable deployment, and create the monitoring needed to operate it with confidence.", builds: ["Model training and fine-tuning", "Data and inference pipelines", "Cloud-native deployment", "MLOps and observability"], stack: ["Python", "PyTorch", "TensorFlow", "AWS", "Azure", "GCP", "Docker", "Kubernetes", "MLflow"] },
+  { title: "AI products & agents", promise: "Systems that reason, retrieve, speak, and take action.", description: "I turn language models into dependable products with grounded context, controlled tool use, human review, and measurable quality.", builds: ["AI agents and copilots", "RAG and knowledge systems", "Real-time voice AI", "Evaluation and guardrails"], stack: ["openai", "anthropic", "gemini", "langchain", "qdrant"] },
+  { title: "Automation & CRM", promise: "Revenue and operations workflows that keep moving without manual follow-up.", description: "I connect the systems a business already uses, remove repetitive work, and design clear exception paths for the moments that still need a person.", builds: ["GoHighLevel CRM systems", "n8n workflow automation", "Lead routing and follow-up", "API and webhook integrations"], stack: ["highlevel", "n8n", "api", "webhook", "email", "twilio"] },
+  { title: "Full-stack applications", promise: "Useful software from first interaction to the underlying data model.", description: "I design and ship customer-facing products and internal platforms with accessible interfaces, typed APIs, secure data, and operational clarity.", builds: ["SaaS products and portals", "Operational dashboards", "Internal business tools", "Responsive web applications"], stack: ["react", "nextjs", "typescript", "nodejs", "fastapi", "postgresql", "supabase"] },
+  { title: "ML, data & infrastructure", promise: "Production foundations that make intelligent products fast, observable, and scalable.", description: "I build the model and data layer, package it for repeatable deployment, and create the monitoring needed to operate it with confidence.", builds: ["Model training and fine-tuning", "Data and inference pipelines", "Cloud-native deployment", "MLOps and observability"], stack: ["python", "pytorch", "tensorflow", "aws", "azure", "gcp", "docker", "kubernetes", "mlflow"] },
 ];
 
 export default function Portfolio() {
@@ -65,7 +86,7 @@ export default function Portfolio() {
         <div className={styles.expertiseDetails}>
           <p>{group.description}</p>
           <div className={styles.buildList}>{group.builds.map(item => <span key={item}>{item}</span>)}</div>
-          <div className={styles.expertiseStack}>{group.stack.map(item => <small key={item}>{item}</small>)}</div>
+          <div className={styles.expertiseStack} aria-label={`${group.title} tools`}>{group.stack.map(item => <ToolLogo key={item} tool={item} />)}</div>
         </div>
       </motion.article>)}</div>
     </section>
