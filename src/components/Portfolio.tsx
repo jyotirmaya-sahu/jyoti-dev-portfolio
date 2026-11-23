@@ -25,8 +25,9 @@ const tools: Record<ToolId, ToolMeta> = {
 function ToolLogo({ tool }: { tool: ToolId }) {
   const item = tools[tool];
   const Icon = item.icon;
-  return <span className={styles.toolLogo} role="img" aria-label={item.name} data-label={item.name} title={item.name}>
+  return <span className={styles.toolLogo}>
     {Icon ? <Icon aria-hidden="true" /> : <span className={styles.highLevelMark} aria-hidden="true" />}
+    <span className={styles.toolLogoName}>{item.name}</span>
   </span>;
 }
 
