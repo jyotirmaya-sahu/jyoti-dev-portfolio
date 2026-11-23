@@ -148,6 +148,8 @@
 .clientStatus::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 4px rgba(52, 199, 89, .13); }
 .clientCard h3 { margin: 0; font-size: clamp(32px, 3.4vw, 48px); letter-spacing: -.045em; }
 .clientPartner { margin: 8px 0 0 !important; color: var(--accent) !important; font-size: 13px; }
+.clientWebsite { width: fit-content; margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 13px; font-weight: 590; text-decoration: none; }
+.clientWebsite:hover { text-decoration: underline; text-underline-offset: 4px; }
 .clientCard h4 { margin: 34px 0 12px; font-size: 19px; letter-spacing: -.02em; }
 .clientCard > p { max-width: 590px; margin: 0; color: var(--muted); line-height: 1.62; }
 .clientTags { margin-top: auto; padding-top: 30px; }

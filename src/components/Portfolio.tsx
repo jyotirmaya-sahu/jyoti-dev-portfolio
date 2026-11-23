@@ -10,7 +10,7 @@ import { FaPython } from "react-icons/fa6";
 import styles from "./Portfolio.module.css";
 
 type Project = { title: string; type: string; metric?: string; description: string; details: string[]; image?: string; href?: string; featured?: boolean };
-type ClientWork = { client: string; project: string; description: string; details: string[]; partner?: string };
+type ClientWork = { client: string; project: string; description: string; details: string[]; partner?: string; website?: string; href?: string };
 type ToolId = "openai" | "anthropic" | "gemini" | "langchain" | "qdrant" | "highlevel" | "n8n" | "api" | "webhook" | "email" | "twilio" | "react" | "nextjs" | "typescript" | "nodejs" | "fastapi" | "postgresql" | "supabase" | "python" | "pytorch" | "tensorflow" | "aws" | "azure" | "gcp" | "docker" | "kubernetes" | "mlflow";
 type Expertise = { title: string; promise: string; description: string; builds: string[]; stack: ToolId[] };
 type ToolMeta = { name: string; icon?: IconType; custom?: "highlevel" };
@@ -41,10 +41,10 @@ const projects: Project[] = [
 ];
 
 const clientWork: ClientWork[] = [
-  { client: "CourierHQ", project: "Courier operations automation", description: "Connected CRM, sales follow-up, operational workflows, and internal tools to reduce manual work across the customer journey.", details: ["GoHighLevel", "n8n", "Sales automation", "Dashboards"] },
+  { client: "CourierHQ", website: "courierhq.io", href: "https://www.courierhq.io/", project: "Courier operations automation", description: "Connected CRM, sales follow-up, operational workflows, and internal tools to reduce manual work across the customer journey.", details: ["GoHighLevel", "n8n", "Sales automation", "Dashboards"] },
   { client: "Courier Business Academy", project: "Education and sales automation", description: "Built lead-capture, nurturing, onboarding, and learner communication workflows for a courier-business education platform.", details: ["CRM pipelines", "Email workflows", "n8n", "AI-assisted operations"] },
-  { client: "Jaylen Feliciano", project: "AI workflows and application development", description: "Developed custom automations, AI-assisted workflows, integrations, and application experiences around real business processes.", details: ["AI agents", "Application development", "APIs", "Integrations"] },
-  { client: "Fund2Grow", partner: "with Darius Benders", project: "Growth and funding workflow automation", description: "Streamlined lead intake, CRM follow-up, client onboarding, and AI-assisted back-office workflows with dependable handoffs.", details: ["GoHighLevel", "Lead routing", "n8n", "Workflow automation"] },
+  { client: "Scale Your Backend", partner: "with Jaylen Feliciano", website: "scaleyourbackend.com", href: "https://scaleyourbackend.com/", project: "AI workflows and application development", description: "Developed custom automations, AI-assisted workflows, integrations, and application experiences around real business processes.", details: ["AI agents", "Application development", "APIs", "Integrations"] },
+  { client: "Fund2Grow", partner: "with Darius Benders", website: "fund2grow.ai", href: "https://www.fund2grow.ai/", project: "Growth and funding workflow automation", description: "Streamlined lead intake, CRM follow-up, client onboarding, and AI-assisted back-office workflows with dependable handoffs.", details: ["GoHighLevel", "Lead routing", "n8n", "Workflow automation"] },
 ];
 
 const expertiseGroups: Expertise[] = [
@@ -119,6 +119,7 @@ export default function Portfolio() {
         <div className={styles.clientTop}><span className={styles.clientIndex}>{String(index + 1).padStart(2, "0")}</span><span className={styles.clientStatus}>Current</span></div>
         <h3>{work.client}</h3>
         {work.partner && <p className={styles.clientPartner}>{work.partner}</p>}
+        {work.href && <a className={styles.clientWebsite} href={work.href} target="_blank" rel="noreferrer">{work.website}<ArrowUpRight size={15} aria-hidden="true" /></a>}
         <h4>{work.project}</h4>
         <p>{work.description}</p>
         <div className={styles.clientTags}>{work.details.map(item => <span key={item}>{item}</span>)}</div>
@@ -129,7 +130,7 @@ export default function Portfolio() {
       <p className={styles.eyebrow}>Experience</p>
       <motion.div className={styles.experienceHeader} {...reveal}><h2>Enterprise depth. Product breadth.</h2><p>Building production software since 2020, from enterprise AI products to founder-led automation and applications.</p></motion.div>
       <div className={styles.timeline}>
-        <motion.article {...reveal}><div><h3>Freelance AI Automation Engineer &amp; Application Developer</h3><p>Independent Consulting</p></div><time>Current</time><ul><li>Delivering AI automation, sales automation, AI agents, integrations, and application development for CourierHQ, Courier Business Academy, Jaylen Feliciano, and Fund2Grow.</li><li>Building GoHighLevel CRM pipelines and n8n workflows spanning lead capture, follow-up, routing, and back-office operations.</li><li>Owning discovery, implementation, testing, deployment, and iteration for client-specific systems.</li></ul></motion.article>
+        <motion.article {...reveal}><div><h3>Freelance AI Automation Engineer &amp; Application Developer</h3><p>Independent Consulting</p></div><time>Current</time><ul><li>Delivering AI automation, sales automation, AI agents, integrations, and application development for CourierHQ, Courier Business Academy, Scale Your Backend, and Fund2Grow.</li><li>Building GoHighLevel CRM pipelines and n8n workflows spanning lead capture, follow-up, routing, and back-office operations.</li><li>Owning discovery, implementation, testing, deployment, and iteration for client-specific systems.</li></ul></motion.article>
         <motion.article {...reveal}><div><h3>AI Engineer</h3><p>Mindfire Solutions · Client: BrightEdge</p></div><time>Oct 2020 - Present</time><ul><li>Led engineering for BrightEdge&apos;s first production LLM content engine and built an AI copilot over large site crawls.</li><li>Cut perceived generation wait time by 50% with WebSocket token streaming and reduced 100+ chart analytics screens from 2–3 minutes to under 5 seconds.</li><li>Built Daily Pulse and reusable product architecture that reduced defects by 40% and accelerated delivery across teams.</li></ul></motion.article>
       </div>
     </section>
