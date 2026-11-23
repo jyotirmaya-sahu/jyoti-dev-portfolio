@@ -7,6 +7,7 @@ import styles from "./Portfolio.module.css";
 
 type Project = { title: string; type: string; metric?: string; description: string; details: string[]; image?: string; href?: string; featured?: boolean };
 type ClientWork = { client: string; project: string; description: string; details: string[]; partner?: string };
+type Expertise = { title: string; promise: string; description: string; builds: string[]; stack: string[] };
 
 const projects: Project[] = [
   { title: "Treÿsta Lead Flow", type: "Real-time AI agent · Dubai brokerage", metric: "EN · HI · AR · multi-turn", image: "/work/treysta.png", href: "https://treysta-lead-flow.vercel.app/", description: "An AI agent for a Dubai real estate brokerage that qualifies incoming leads through a human, multi-turn conversation in English, Hindi, and Arabic, then writes the qualified, routed lead straight into the CRM. Grounded on the client's live projects so answers stay accurate.", details: ["OpenAI", "Multi-turn agent", "Webhook HMAC", "Idempotent CRM sync", "TypeScript"], featured: true },
@@ -24,14 +25,11 @@ const clientWork: ClientWork[] = [
   { client: "Fund2Grow", partner: "with Darius Benders", project: "Growth and funding workflow automation", description: "Streamlined lead intake, CRM follow-up, client onboarding, and AI-assisted back-office workflows with dependable handoffs.", details: ["GoHighLevel", "Lead routing", "n8n", "Workflow automation"] },
 ];
 
-const skillGroups = [
-  { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL"] },
-  { label: "LLMs & GenAI", items: ["OpenAI (GPT)", "Anthropic (Claude)", "Gemini", "Llama", "Hugging Face", "NLP"] },
-  { label: "RAG & Agents", items: ["RAG", "Embeddings", "Pinecone", "FAISS", "Qdrant", "LangChain", "LangGraph", "AI agents"] },
-  { label: "ML & Deep Learning", items: ["PyTorch", "TensorFlow", "scikit-learn", "Pandas", "NumPy", "Computer vision", "Fine-tuning"] },
-  { label: "MLOps & Cloud", items: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "MLflow", "CI/CD"] },
-  { label: "Automation & CRM", items: ["GoHighLevel", "n8n", "Sales automation", "CRM workflows", "APIs", "Webhooks"] },
-  { label: "Product & Full-stack", items: ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "Twilio", "Supabase"] },
+const expertiseGroups: Expertise[] = [
+  { title: "AI products & agents", promise: "Systems that reason, retrieve, speak, and take action.", description: "I turn language models into dependable products with grounded context, controlled tool use, human review, and measurable quality.", builds: ["AI agents and copilots", "RAG and knowledge systems", "Real-time voice AI", "Evaluation and guardrails"], stack: ["OpenAI", "Anthropic", "Gemini", "Llama", "LangGraph", "LlamaIndex", "Pinecone", "Qdrant"] },
+  { title: "Automation & CRM", promise: "Revenue and operations workflows that keep moving without manual follow-up.", description: "I connect the systems a business already uses, remove repetitive work, and design clear exception paths for the moments that still need a person.", builds: ["GoHighLevel CRM systems", "n8n workflow automation", "Lead routing and follow-up", "API and webhook integrations"], stack: ["GoHighLevel", "n8n", "REST APIs", "Webhooks", "Email", "Twilio", "Sales automation"] },
+  { title: "Full-stack applications", promise: "Useful software from first interaction to the underlying data model.", description: "I design and ship customer-facing products and internal platforms with accessible interfaces, typed APIs, secure data, and operational clarity.", builds: ["SaaS products and portals", "Operational dashboards", "Internal business tools", "Responsive web applications"], stack: ["React", "Next.js", "TypeScript", "Node.js", "FastAPI", "PostgreSQL", "Supabase", "Playwright"] },
+  { title: "ML, data & infrastructure", promise: "Production foundations that make intelligent products fast, observable, and scalable.", description: "I build the model and data layer, package it for repeatable deployment, and create the monitoring needed to operate it with confidence.", builds: ["Model training and fine-tuning", "Data and inference pipelines", "Cloud-native deployment", "MLOps and observability"], stack: ["Python", "PyTorch", "TensorFlow", "AWS", "Azure", "GCP", "Docker", "Kubernetes", "MLflow"] },
 ];
 
 export default function Portfolio() {
@@ -41,7 +39,7 @@ export default function Portfolio() {
   return <main className={styles.page}>
     <nav className={styles.nav} aria-label="Primary navigation">
       <a className={styles.wordmark} href="#top">JS</a>
-      <div className={styles.navLinks}><a href="#work">Work</a><a href="#clients">Clients</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
+      <div className={styles.navLinks}><a href="#expertise">Expertise</a><a href="#work">Work</a><a href="#clients">Clients</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
       <a className={styles.resumeLink} href="/JyotirmayaSahuResume.pdf" download>Resume <Download size={15} aria-hidden="true" /></a>
     </nav>
 
@@ -54,6 +52,22 @@ export default function Portfolio() {
       </motion.div>
       <motion.figure className={styles.portrait} initial={reduce ? false : { opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .8, delay: .12 }}><Image src="/profile_pic.jpeg" alt="Jyotirmaya Sahu" fill priority sizes="(max-width: 768px) 92vw, 40vw" /></motion.figure>
       <p className={styles.heroNote}>Building reliable AI systems and business automation for growing companies, backed by enterprise engineering experience with BrightEdge since 2020.</p>
+    </section>
+
+    <section id="expertise" className={styles.expertise}>
+      <motion.div className={styles.expertiseHeader} {...reveal}>
+        <div><p className={styles.eyebrow}>What I can build</p><h2>Four disciplines. One complete delivery path.</h2></div>
+        <p>From the model and workflow logic to the interface, infrastructure, and production rollout—I build the whole system.</p>
+      </motion.div>
+      <div className={styles.expertiseList}>{expertiseGroups.map((group, index) => <motion.article key={group.title} className={styles.expertiseItem} {...reveal} transition={{ ...reveal.transition, delay: index * .05 }}>
+        <span className={styles.expertiseNumber}>{String(index + 1).padStart(2, "0")}</span>
+        <div className={styles.expertiseTitle}><h3>{group.title}</h3><p>{group.promise}</p></div>
+        <div className={styles.expertiseDetails}>
+          <p>{group.description}</p>
+          <div className={styles.buildList}>{group.builds.map(item => <span key={item}>{item}</span>)}</div>
+          <div className={styles.expertiseStack}>{group.stack.map(item => <small key={item}>{item}</small>)}</div>
+        </div>
+      </motion.article>)}</div>
     </section>
 
     <section id="work" className={styles.work}>
@@ -88,17 +102,6 @@ export default function Portfolio() {
         <div className={styles.clientTags}>{work.details.map(item => <span key={item}>{item}</span>)}</div>
       </motion.article>)}</div>
     </section>
-
-    <section className={styles.capabilities}>
-      <motion.div className={styles.capabilityLead} {...reveal}><h2>AI grounded in software engineering.</h2><p>I design the product, build the system, connect the model, and make the whole thing dependable in production.</p></motion.div>
-      <motion.div className={styles.capabilityList} {...reveal}>
-        <article><strong>Applied AI</strong><p>Agent workflows, retrieval systems, real-time voice, tool use, evaluation, and safety boundaries.</p></article>
-        <article><strong>Full-stack products</strong><p>Accessible React interfaces, typed APIs, data models, authentication, billing, and operational workflows.</p></article>
-        <article><strong>Production architecture</strong><p>Tenant isolation, queues, idempotency, observability, resilient integrations, testing, and deployment.</p></article>
-      </motion.div>
-    </section>
-
-    <section className={styles.stack}><h2>Skills</h2><div className={styles.skillGroups}>{skillGroups.map(group => <div key={group.label} className={styles.skillGroup}><h3>{group.label}</h3><div>{group.items.map(item => <span key={item}>{item}</span>)}</div></div>)}</div></section>
 
     <section id="experience" className={styles.experience}>
       <p className={styles.eyebrow}>Experience</p>
