@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phon
 import styles from "./Portfolio.module.css";
 
 type Project = { title: string; type: string; metric?: string; description: string; details: string[]; image?: string; href?: string; featured?: boolean };
+type ClientWork = { client: string; project: string; description: string; details: string[]; partner?: string };
 
 const projects: Project[] = [
   { title: "Treÿsta Lead Flow", type: "Real-time AI agent · Dubai brokerage", metric: "EN · HI · AR · multi-turn", image: "/work/treysta.png", href: "https://treysta-lead-flow.vercel.app/", description: "An AI agent for a Dubai real estate brokerage that qualifies incoming leads through a human, multi-turn conversation in English, Hindi, and Arabic, then writes the qualified, routed lead straight into the CRM. Grounded on the client's live projects so answers stay accurate.", details: ["OpenAI", "Multi-turn agent", "Webhook HMAC", "Idempotent CRM sync", "TypeScript"], featured: true },
@@ -16,12 +17,20 @@ const projects: Project[] = [
   { title: "UAE Property Manager", type: "Full-stack property operations", metric: "Leasing to finance to maintenance", image: "/work/property.png", description: "A unified workspace spanning leasing, portfolio operations, contracts, finance, maintenance, and reporting.", details: ["React", "Cloudflare", "D1", "Product engineering"] },
 ];
 
+const clientWork: ClientWork[] = [
+  { client: "CourierHQ", project: "Courier operations automation", description: "Connected CRM, sales follow-up, operational workflows, and internal tools to reduce manual work across the customer journey.", details: ["GoHighLevel", "n8n", "Sales automation", "Dashboards"] },
+  { client: "Courier Business Academy", project: "Education and sales automation", description: "Built lead-capture, nurturing, onboarding, and learner communication workflows for a courier-business education platform.", details: ["CRM pipelines", "Email workflows", "n8n", "AI-assisted operations"] },
+  { client: "Jaylen Feliciano", project: "AI workflows and application development", description: "Developed custom automations, AI-assisted workflows, integrations, and application experiences around real business processes.", details: ["AI agents", "Application development", "APIs", "Integrations"] },
+  { client: "Fund2Grow", partner: "with Darius Benders", project: "Growth and funding workflow automation", description: "Streamlined lead intake, CRM follow-up, client onboarding, and AI-assisted back-office workflows with dependable handoffs.", details: ["GoHighLevel", "Lead routing", "n8n", "Workflow automation"] },
+];
+
 const skillGroups = [
   { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL"] },
   { label: "LLMs & GenAI", items: ["OpenAI (GPT)", "Anthropic (Claude)", "Gemini", "Llama", "Hugging Face", "NLP"] },
-  { label: "RAG & Agents", items: ["RAG", "Embeddings", "Pinecone", "FAISS", "Qdrant", "LangChain", "LangGraph", "Agentic workflows"] },
+  { label: "RAG & Agents", items: ["RAG", "Embeddings", "Pinecone", "FAISS", "Qdrant", "LangChain", "LangGraph", "AI agents"] },
   { label: "ML & Deep Learning", items: ["PyTorch", "TensorFlow", "scikit-learn", "Pandas", "NumPy", "Computer vision", "Fine-tuning"] },
   { label: "MLOps & Cloud", items: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "MLflow", "CI/CD"] },
+  { label: "Automation & CRM", items: ["GoHighLevel", "n8n", "Sales automation", "CRM workflows", "APIs", "Webhooks"] },
   { label: "Product & Full-stack", items: ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "Twilio", "Supabase"] },
 ];
 
@@ -32,7 +41,7 @@ export default function Portfolio() {
   return <main className={styles.page}>
     <nav className={styles.nav} aria-label="Primary navigation">
       <a className={styles.wordmark} href="#top">JS</a>
-      <div className={styles.navLinks}><a href="#work">Work</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
+      <div className={styles.navLinks}><a href="#work">Work</a><a href="#clients">Clients</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
       <a className={styles.resumeLink} href="/JyotirmayaSahuResume.pdf" download>Resume <Download size={15} aria-hidden="true" /></a>
     </nav>
 
@@ -40,11 +49,11 @@ export default function Portfolio() {
       <motion.div className={styles.heroCopy} initial={reduce ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .75 }}>
         <p className={styles.eyebrow}>AI Engineer · Dubai, UAE</p>
         <h1>I build systems that think, scale, and ship.</h1>
-        <p className={styles.heroText}>Production AI and full-stack products, engineered from first interface to resilient infrastructure. Based in Dubai and open to AI Engineer roles.</p>
+        <p className={styles.heroText}>Production AI, intelligent automation, and full-stack products—engineered from first interface to resilient infrastructure. Based in Dubai and open to AI Engineer roles and select client work.</p>
         <div className={styles.heroActions}><a className={styles.primaryButton} href="#work">View work <ArrowDown size={17} /></a><a className={styles.textLink} href="mailto:sahu.jyotirmaya26@gmail.com">Email me <ArrowUpRight size={16} /></a></div>
       </motion.div>
       <motion.figure className={styles.portrait} initial={reduce ? false : { opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .8, delay: .12 }}><Image src="/profile_pic.jpeg" alt="Jyotirmaya Sahu" fill priority sizes="(max-width: 768px) 92vw, 40vw" /></motion.figure>
-      <p className={styles.heroNote}>Building reliable AI systems and thoughtful full-stack products, backed by enterprise engineering experience at BrightEdge.</p>
+      <p className={styles.heroNote}>Building reliable AI systems and business automation for growing companies, backed by enterprise engineering experience with BrightEdge since 2020.</p>
     </section>
 
     <section id="work" className={styles.work}>
@@ -57,12 +66,27 @@ export default function Portfolio() {
       <motion.div className={styles.earlierWork} {...reveal}>
         <h3>Earlier work</h3>
         <div>
-          <span>E-Commerce Performance Overhaul</span>
-          <span>AI-Powered SEO Dashboard</span>
-          <span>Real-time Collaboration Tool</span>
-          <span>Design System Migration</span>
+          <span>BrightEdge LLM Content Engine</span>
+          <span>AI SEO Copilot</span>
+          <span>Daily Pulse Intelligence</span>
+          <span>Enterprise Analytics Platform</span>
         </div>
       </motion.div>
+    </section>
+
+    <section id="clients" className={styles.clients}>
+      <motion.div className={styles.clientsHeader} {...reveal}>
+        <div><p className={styles.eyebrow}>Current freelance clients</p><h2>Automation built around the way each business works.</h2></div>
+        <p>I partner directly with founders and operating teams to take projects from discovery through implementation, testing, deployment, and iteration.</p>
+      </motion.div>
+      <div className={styles.clientGrid}>{clientWork.map((work, index) => <motion.article key={work.client} className={styles.clientCard} {...reveal} transition={{ ...reveal.transition, delay: (index % 2) * .08 }}>
+        <div className={styles.clientTop}><span className={styles.clientIndex}>{String(index + 1).padStart(2, "0")}</span><span className={styles.clientStatus}>Current</span></div>
+        <h3>{work.client}</h3>
+        {work.partner && <p className={styles.clientPartner}>{work.partner}</p>}
+        <h4>{work.project}</h4>
+        <p>{work.description}</p>
+        <div className={styles.clientTags}>{work.details.map(item => <span key={item}>{item}</span>)}</div>
+      </motion.article>)}</div>
     </section>
 
     <section className={styles.capabilities}>
@@ -78,10 +102,10 @@ export default function Portfolio() {
 
     <section id="experience" className={styles.experience}>
       <p className={styles.eyebrow}>Experience</p>
-      <motion.div className={styles.experienceHeader} {...reveal}><h2>Enterprise depth. Product breadth.</h2><p>More than five years building high-performance software and growing into applied AI engineering.</p></motion.div>
+      <motion.div className={styles.experienceHeader} {...reveal}><h2>Enterprise depth. Product breadth.</h2><p>Building production software since 2020, from enterprise AI products to founder-led automation and applications.</p></motion.div>
       <div className={styles.timeline}>
-        <motion.article {...reveal}><div><h3>Senior Software Engineer</h3><p>BrightEdge</p></div><time>2022 - May 2026</time><ul><li>Built AI recommendation experiences and complex SEO analytics products.</li><li>Reduced critical enterprise page-load times by 95%.</li><li>Created reusable frontend architecture used across product teams.</li><li>Mentored engineers and led technical knowledge transfer.</li></ul></motion.article>
-        <motion.article {...reveal}><div><h3>Software Engineer</h3><p>BrightEdge</p></div><time>2020 - 2022</time><ul><li>Built Daily Pulse, an SEO health tracker used by enterprise customers.</li><li>Developed data-rich dashboards and a reusable chart framework.</li><li>Improved engineering efficiency while reducing product defects.</li></ul></motion.article>
+        <motion.article {...reveal}><div><h3>Freelance AI Automation Engineer &amp; Application Developer</h3><p>Independent Consulting</p></div><time>Current</time><ul><li>Delivering AI automation, sales automation, AI agents, integrations, and application development for CourierHQ, Courier Business Academy, Jaylen Feliciano, and Fund2Grow.</li><li>Building GoHighLevel CRM pipelines and n8n workflows spanning lead capture, follow-up, routing, and back-office operations.</li><li>Owning discovery, implementation, testing, deployment, and iteration for client-specific systems.</li></ul></motion.article>
+        <motion.article {...reveal}><div><h3>AI Engineer</h3><p>Mindfire Solutions · Client: BrightEdge</p></div><time>Oct 2020 - Present</time><ul><li>Led engineering for BrightEdge&apos;s first production LLM content engine and built an AI copilot over large site crawls.</li><li>Cut perceived generation wait time by 50% with WebSocket token streaming and reduced 100+ chart analytics screens from 2–3 minutes to under 5 seconds.</li><li>Built Daily Pulse and reusable product architecture that reduced defects by 40% and accelerated delivery across teams.</li></ul></motion.article>
       </div>
     </section>
 
@@ -91,7 +115,7 @@ export default function Portfolio() {
         <h2>Let&apos;s make it real.</h2>
         <div className={styles.contactDetails}>
           <a href="mailto:sahu.jyotirmaya26@gmail.com"><Mail size={16} aria-hidden="true" /> sahu.jyotirmaya26@gmail.com</a>
-          <a href="tel:+971543334174"><Phone size={16} aria-hidden="true" /> +971 54 333 4174</a>
+          <a href="tel:+971502776805"><Phone size={16} aria-hidden="true" /> +971 50 277 6805</a>
           <a href="https://linkedin.com/in/jyotirmaya-sahu" target="_blank" rel="noreferrer"><Linkedin size={16} aria-hidden="true" /> linkedin.com/in/jyotirmaya-sahu</a>
           <span><MapPin size={16} aria-hidden="true" /> Dubai, UAE · UAE residence visa · available on short notice</span>
         </div>

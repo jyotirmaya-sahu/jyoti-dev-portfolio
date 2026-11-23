@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jyotirmaya Sahu | AI & Full-Stack Engineer",
-  description: "AI and full-stack engineer building reliable intelligent systems, enterprise products, and high-performance web applications.",
+  description: "AI and full-stack engineer building production AI agents, intelligent automation, CRM workflows, and high-performance applications.",
   openGraph: {
     title: "Jyotirmaya Sahu | AI & Full-Stack Engineer",
-    description: "Production AI systems. Full-stack products. Enterprise engineering.",
+    description: "Production AI systems. Intelligent automation. Full-stack products. Enterprise engineering.",
     type: "website",
   },
 };
