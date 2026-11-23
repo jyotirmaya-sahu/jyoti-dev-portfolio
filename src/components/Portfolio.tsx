@@ -72,7 +72,7 @@ export default function Portfolio() {
         <p className={styles.heroText}>Production AI, intelligent automation, and full-stack products—engineered from first interface to resilient infrastructure. Based in Dubai and open to AI Engineer roles and select client work.</p>
         <div className={styles.heroActions}><a className={styles.primaryButton} href="#work">View work <ArrowDown size={17} /></a><a className={styles.textLink} href="mailto:sahu.jyotirmaya26@gmail.com">Email me <ArrowUpRight size={16} /></a></div>
       </motion.div>
-      <motion.figure className={styles.portrait} initial={reduce ? false : { opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .8, delay: .12 }}><Image src="/profile_pic.jpeg" alt="Jyotirmaya Sahu" fill priority sizes="(max-width: 768px) 92vw, 40vw" /></motion.figure>
+      <motion.figure className={styles.portrait} initial={reduce ? false : { opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .8, delay: .12 }}><Image src="/profile_pic_night.jpeg" alt="Jyotirmaya Sahu by the Dubai waterfront at night" fill priority sizes="(max-width: 768px) 92vw, 40vw" /></motion.figure>
       <p className={styles.heroNote}>Building reliable AI systems and business automation for growing companies, backed by enterprise engineering experience with BrightEdge since 2020.</p>
     </section>
 
