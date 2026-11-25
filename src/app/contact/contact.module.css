@@ -1,0 +1,199 @@
+.page {
+  --background:#0c1710;
+  --surface:#15251a;
+  --surface-strong:#1b2e20;
+  --ink:#f1f4ef;
+  --muted:#aab5ab;
+  --accent:#ef744b;
+  --line:rgba(241,244,239,.14);
+  min-height:100dvh;
+  color:var(--ink);
+  background:var(--background);
+}
+
+.nav {
+  position:relative;
+  z-index:2;
+  width:min(100%,1440px);
+  height:72px;
+  margin:0 auto;
+  padding:0 max(24px,4vw);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+
+.wordmark {
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  color:#0c1710;
+  background:var(--ink);
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.backLink {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--ink);
+  font-size:13px;
+  font-weight:750;
+  text-decoration:none;
+}
+
+.contactHero {
+  width:min(100%,1440px);
+  margin:0 auto;
+  padding:clamp(72px,9vw,128px) max(24px,4vw) 80px;
+}
+
+.intro { max-width:920px; }
+.intro p {
+  margin:0 0 24px;
+  color:var(--accent);
+  font-family:var(--font-plex-mono),monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+}
+.intro h1 {
+  max-width:900px;
+  margin:0;
+  font-size:clamp(52px,7.5vw,104px);
+  line-height:.93;
+  letter-spacing:-.065em;
+  text-wrap:balance;
+}
+.intro>span {
+  display:block;
+  margin-top:28px;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.contactGrid {
+  margin-top:clamp(64px,8vw,110px);
+  display:grid;
+  grid-template-columns:minmax(280px,.64fr) minmax(520px,1.36fr);
+  gap:18px;
+  align-items:start;
+}
+
+.emailPanel,
+.calendarPanel {
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:var(--surface);
+}
+
+.emailPanel {
+  min-height:520px;
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+}
+.emailIcon {
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  color:#162018;
+  background:var(--accent);
+}
+.emailPanel>span {
+  margin-top:56px;
+  color:var(--accent);
+  font-family:var(--font-plex-mono),monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.1em;
+}
+.emailPanel h2 {
+  margin:18px 0 0;
+  font-size:clamp(34px,3.3vw,52px);
+  line-height:.98;
+  letter-spacing:-.05em;
+}
+.emailPanel p {
+  max-width:380px;
+  margin:20px 0 0;
+  color:var(--muted);
+  line-height:1.6;
+}
+.emailPanel a {
+  margin-top:auto;
+  padding-top:48px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  border-top:1px solid var(--line);
+  color:var(--ink);
+  font-size:clamp(13px,1.35vw,17px);
+  font-weight:750;
+  overflow-wrap:anywhere;
+  text-decoration:none;
+}
+.emailPanel a svg { flex:0 0 auto; color:var(--accent); }
+.emailPanel small { margin-top:18px; color:var(--muted); font-size:11px; }
+
+.calendarPanel { padding:22px; }
+.calendarPanel>header {
+  padding:12px 10px 26px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+}
+.calendarPanel>header>div {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--accent);
+}
+.calendarPanel>header span {
+  font-family:var(--font-plex-mono),monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.1em;
+}
+.calendarPanel h2 {
+  margin:0;
+  font-size:clamp(24px,2.5vw,38px);
+  line-height:1;
+  letter-spacing:-.045em;
+}
+.calendarFrame {
+  min-height:720px;
+  overflow:hidden;
+  border-radius:15px;
+  background:#ffffff;
+}
+.calendarFrame iframe { width:100%; height:720px; display:block; border:0; }
+
+@media(max-width:900px) {
+  .contactGrid { grid-template-columns:1fr; }
+  .emailPanel { min-height:440px; }
+}
+
+@media(max-width:600px) {
+  .nav { height:64px; padding:0 18px; }
+  .backLink { font-size:12px; }
+  .contactHero { padding:58px 10px 40px; }
+  .intro { padding:0 10px; }
+  .intro h1 { font-size:clamp(48px,15vw,64px); }
+  .intro>span { font-size:16px; }
+  .contactGrid { margin-top:54px; gap:12px; }
+  .emailPanel,.calendarPanel { border-radius:18px; }
+  .emailPanel { min-height:420px; padding:26px 22px; }
+  .calendarPanel { padding:10px; }
+  .calendarPanel>header { padding:16px 10px 22px; align-items:flex-start; flex-direction:column; gap:14px; }
+  .calendarFrame,.calendarFrame iframe { height:760px; min-height:760px; }
+}
